@@ -37,63 +37,144 @@
           <a href="tel:+917306275778" class="y-btn y-btn--gold">Call Now</a>
           <a [href]="directionsUrl" target="_blank" rel="noopener" class="y-btn y-btn--outline">Get Directions</a>
         </div>
+
+        <div class="y-contact__map">
+          <iframe
+            [src]="mapUrl"
+            width="100%"
+            height="320"
+            style="border:0;"
+            allowfullscreen="true"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin">
+          </iframe>
+        </div>
       </div>
 
       <div class="y-contact__form-col">
         <form class="y-contact__form" [formGroup]="form" (ngSubmit)="submit()">
-          <mat-form-field appearance="outline">
-            <mat-label>Name</mat-label>
-            <input matInput formControlName="name" required>
-          </mat-form-field>
+          <div class="y-field">
+            <label class="y-field__label">Full name <span class="y-field__req">*</span></label>
+            <div class="y-field__control">
+              <svg class="y-field__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" />
+              </svg>
+              <input class="y-field__input" [class.y-field__input--error]="isInvalid('name')" type="text" formControlName="name" placeholder="e.g. Katherine Pierce" required>
+            </div>
+            @if (isInvalid('name')) {
+              <span class="y-field__error">{{ errorMessage('name') }}</span>
+            }
+          </div>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Phone</mat-label>
-            <input matInput formControlName="phone" required>
-          </mat-form-field>
+          <div class="y-field">
+            <label class="y-field__label">Phone number <span class="y-field__req">*</span></label>
+            <div class="y-field__control">
+              <svg class="y-field__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 5c0-.55.45-1 1-1h2.7c.5 0 .92.37.99.86l.6 4.2a1 1 0 0 1-.28.88l-1.6 1.6a14.6 14.6 0 0 0 6.05 6.05l1.6-1.6a1 1 0 0 1 .88-.28l4.2.6c.49.07.86.5.86.99V20c0 .55-.45 1-1 1h-1.5C9.4 21 3 14.6 3 6.5V5Z" />
+              </svg>
+              <input class="y-field__input" [class.y-field__input--error]="isInvalid('phone')" type="tel" formControlName="phone" placeholder="+91 00000 00000" required>
+            </div>
+            @if (isInvalid('phone')) {
+              <span class="y-field__error">{{ errorMessage('phone') }}</span>
+            }
+          </div>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Service</mat-label>
-            <input matInput formControlName="service" required>
-          </mat-form-field>
+          <div class="y-field">
+            <label class="y-field__label">Select service <span class="y-field__req">*</span></label>
+            <div class="y-field__control y-dropdown">
+              <svg class="y-field__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3l1.8 4.6L18 9l-4.2 1.4L12 15l-1.8-4.6L6 9l4.2-1.4L12 3Z" />
+                <path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8.8-2Z" />
+              </svg>
+              <button type="button" class="y-field__input y-dropdown__trigger" [class.y-field__input--error]="isInvalid('service')" (click)="toggleDropdown('service')">
+                <span [class.is-placeholder]="!form.controls.service.value">{{ form.controls.service.value || 'Choose a tailored experience…' }}</span>
+              </button>
+              <svg class="y-field__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 9l6 6 6-6" />
+              </svg>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Preferred date</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="preferredDate" required>
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Preferred time</mat-label>
-            <mat-select formControlName="preferredTime" required>
-              @for (slot of timeSlots; track slot.value) {
-                <mat-option [value]="slot.value">{{ slot.label }}</mat-option>
+              @if (openDropdown() === 'service') {
+                <ul class="y-dropdown__panel">
+                  @for (s of serviceOptions; track s) {
+                    <li class="y-dropdown__option" [class.is-selected]="form.controls.service.value === s" (click)="selectService(s)">{{ s }}</li>
+                  }
+                </ul>
               }
-            </mat-select>
-          </mat-form-field>
+            </div>
+            @if (isInvalid('service')) {
+              <span class="y-field__error">{{ errorMessage('service') }}</span>
+            }
+          </div>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Notes (optional)</mat-label>
-            <textarea matInput formControlName="notes" rows="2"></textarea>
-          </mat-form-field>
+          <div class="y-field-row">
+            <div class="y-field">
+              <label class="y-field__label">Preferred date <span class="y-field__req">*</span></label>
+              <div class="y-field__control" (click)="picker.open()">
+                <svg class="y-field__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3.5" y="5" width="17" height="15" rx="2" />
+                  <path d="M3.5 9.5h17M8 3v3.5M16 3v3.5" />
+                </svg>
+                <input class="y-field__input y-field__date" [class.y-field__input--error]="isInvalid('preferredDate')"
+                       [matDatepicker]="picker" [min]="minDate" formControlName="preferredDate"
+                       placeholder="Choose a date" readonly required>
+                <mat-datepicker #picker panelClass="y-datepicker-panel"></mat-datepicker>
+              </div>
+              @if (isInvalid('preferredDate')) {
+                <span class="y-field__error">{{ errorMessage('preferredDate') }}</span>
+              }
+            </div>
 
-          <button type="submit" class="y-btn y-btn--gold" [disabled]="submitting()">
+            <div class="y-field">
+              <label class="y-field__label">Preferred time <span class="y-field__req">*</span></label>
+              <div class="y-field__control y-dropdown">
+                <svg class="y-field__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="8.5" />
+                  <path d="M12 7.5V12l3 2" />
+                </svg>
+                <button type="button" class="y-field__input y-dropdown__trigger" [class.y-field__input--error]="isInvalid('preferredTime')" (click)="toggleDropdown('time')">
+                  <span [class.is-placeholder]="!form.controls.preferredTime.value">{{ form.controls.preferredTime.value ? timeLabelFor(form.controls.preferredTime.value) : 'Select time slot' }}</span>
+                </button>
+                <svg class="y-field__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+
+                @if (openDropdown() === 'time') {
+                  <ul class="y-dropdown__panel">
+                    @for (slot of timeSlots; track slot.value) {
+                      <li class="y-dropdown__option" [class.is-selected]="form.controls.preferredTime.value === slot.value" (click)="selectTime(slot)">{{ slot.label }}</li>
+                    }
+                  </ul>
+                }
+              </div>
+              @if (isInvalid('preferredTime')) {
+                <span class="y-field__error">{{ errorMessage('preferredTime') }}</span>
+              }
+            </div>
+          </div>
+
+          <div class="y-field">
+            <div class="y-field__label-row">
+              <label class="y-field__label">Notes</label>
+              <span class="y-field__optional">(optional)</span>
+            </div>
+            <textarea class="y-field__textarea" [class.y-field__input--error]="isInvalid('notes')" formControlName="notes" rows="3" placeholder="Share any special preferences, allergies, or styling references…"></textarea>
+            @if (isInvalid('notes')) {
+              <span class="y-field__error">{{ errorMessage('notes') }}</span>
+            }
+          </div>
+
+          <button type="submit" class="y-field__submit" [disabled]="submitting()">
             {{ submitting() ? 'Sending…' : 'Request Appointment' }}
+            @if (!submitting()) {
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            }
           </button>
+          <p class="y-field__hint">We will confirm your booking via WhatsApp / Phone call within 2 hours.</p>
         </form>
       </div>
-    </div>
-
-    <div class="y-contact__map">
-      <iframe
-        [src]="mapUrl"
-        width="100%"
-        height="440"
-        style="border:0;"
-        allowfullscreen="true"
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin">
-      </iframe>
     </div>
   </div>
 </section>

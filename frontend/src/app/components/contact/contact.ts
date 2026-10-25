@@ -1,23 +1,17 @@
-import { Component, Input, inject, signal } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
+import { Component, HostListener, Input, inject, signal } from '@angular/core';
+import { AbstractControl, ReactiveFormsModule, FormBuilder, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { DataService } from '../../core/data.service';
 import { SiteContact } from '../../core/models';
-import { CONTACT } from '../../core/fallback-data';
+import { CONTACT, SERVICES } from '../../core/fallback-data';
 
 @Component({
   selector: 'app-contact',
   imports: [
     ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatSnackBarModule,
@@ -39,15 +33,73 @@ export class Contact {
   readonly directionsUrl = 'https://www.google.com/maps/dir/?api=1&destination=9.995646835520429,76.39667856784311';
   readonly submitting = signal(false);
   readonly timeSlots = this.buildTimeSlots();
+  readonly serviceOptions = SERVICES.map((s) => s.title);
+  readonly minDate = new Date();
 
-  readonly form = this.fb.nonNullable.group({
-    name: ['', Validators.required],
-    phone: ['', [Validators.required, Validators.pattern(/^[0-9+\-\s]{7,15}$/)]],
-    service: ['', Validators.required],
-    preferredDate: ['', Validators.required],
-    preferredTime: ['', Validators.required],
-    notes: [''],
+  readonly form = this.fb.group({
+    name: this.fb.nonNullable.control('', [Validators.required, Validators.minLength(2), Validators.maxLength(80)]),
+    phone: this.fb.nonNullable.control('', [Validators.required, indianMobileValidator()]),
+    service: this.fb.nonNullable.control('', Validators.required),
+    preferredDate: this.fb.control<Date | null>(null, Validators.required),
+    preferredTime: this.fb.nonNullable.control('', Validators.required),
+    notes: this.fb.nonNullable.control('', Validators.maxLength(500)),
   });
+
+  readonly openDropdown = signal<'service' | 'time' | null>(null);
+
+  toggleDropdown(name: 'service' | 'time'): void {
+    this.openDropdown.update((cur) => (cur === name ? null : name));
+  }
+
+  selectService(value: string): void {
+    this.form.controls.service.setValue(value);
+    this.form.controls.service.markAsDirty();
+    this.form.controls.service.markAsTouched();
+    this.openDropdown.set(null);
+  }
+
+  selectTime(slot: { value: string; label: string }): void {
+    this.form.controls.preferredTime.setValue(slot.value);
+    this.form.controls.preferredTime.markAsDirty();
+    this.form.controls.preferredTime.markAsTouched();
+    this.openDropdown.set(null);
+  }
+
+  timeLabelFor(value: string): string {
+    return this.timeSlots.find((s) => s.value === value)?.label ?? '';
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    if (!this.openDropdown()) return;
+    const target = event.target as HTMLElement;
+    if (!target.closest('.y-dropdown')) {
+      this.openDropdown.set(null);
+    }
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    this.openDropdown.set(null);
+  }
+
+  isInvalid(controlName: string): boolean {
+    const control = this.form.get(controlName);
+    return !!control && control.invalid && (control.touched || control.dirty);
+  }
+
+  errorMessage(controlName: string): string {
+    const control = this.form.get(controlName);
+    if (!control || !control.errors) return '';
+
+    if (control.errors['required']) return 'This field is required.';
+    if (controlName === 'phone' && control.errors['invalidMobile']) {
+      return 'Enter a valid 10-digit mobile number.';
+    }
+    if (control.errors['minlength']) return `Must be at least ${control.errors['minlength'].requiredLength} characters.`;
+    if (control.errors['maxlength']) return `Must be under ${control.errors['maxlength'].requiredLength} characters.`;
+    return 'This field is invalid.';
+  }
 
   private buildTimeSlots(): { value: string; label: string }[] {
     const slots: { value: string; label: string }[] = [];
@@ -70,18 +122,19 @@ export class Contact {
 
     this.submitting.set(true);
     const raw = this.form.getRawValue();
+    const preferredDate = raw.preferredDate as Date;
 
     this.data.createBooking({
       name: raw.name,
       phone: raw.phone,
       service: raw.service,
-      preferredDate: raw.preferredDate,
+      preferredDate: this.toIsoDate(preferredDate),
       preferredTime: raw.preferredTime,
       notes: raw.notes,
     }).subscribe({
       next: () => {
         this.submitting.set(false);
-        this.openWhatsAppDm(raw);
+        this.openWhatsAppDm({ ...raw, preferredDate });
         this.form.reset();
         this.snackBar.open('Thanks — we\'ll confirm your appointment shortly.', 'Close', { duration: 5000 });
       },
@@ -96,13 +149,11 @@ export class Contact {
     name: string;
     phone: string;
     service: string;
-    preferredDate: string | Date;
+    preferredDate: Date;
     preferredTime: string;
     notes: string;
   }): void {
-    const dateLabel = raw.preferredDate instanceof Date
-      ? raw.preferredDate.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })
-      : String(raw.preferredDate);
+    const dateLabel = raw.preferredDate.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
     const timeLabel = this.timeSlots.find(slot => slot.value === raw.preferredTime)?.label ?? raw.preferredTime;
     const requestedOn = new Date().toLocaleString('en-IN', {
       day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true,
@@ -123,4 +174,28 @@ export class Contact {
     const url = `https://wa.me/${salonNumber}?text=${encodeURIComponent(lines.join('\n'))}`;
     window.open(url, '_blank');
   }
+
+  private toIsoDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+}
+
+function indianMobileValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const raw = (control.value ?? '') as string;
+    if (!raw) return null;
+
+    let digits = raw.replace(/\D/g, '');
+    if (digits.startsWith('91') && digits.length === 12) {
+      digits = digits.slice(2);
+    } else if (digits.startsWith('0') && digits.length === 11) {
+      digits = digits.slice(1);
+    }
+
+    const isValid = /^[6-9]\d{9}$/.test(digits);
+    return isValid ? null : { invalidMobile: true };
+  };
 }

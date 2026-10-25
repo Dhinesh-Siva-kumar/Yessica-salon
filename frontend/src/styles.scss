@@ -136,6 +136,24 @@ img { max-width: 100%; display: block; }
   background: transparent;
 }
 
+.y-datepicker-panel {
+  .mat-datepicker-content {
+    border-radius: 16px;
+    border: 1px solid rgba(230, 178, 69, .3);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .55);
+    font-family: var(--y-font-body);
+  }
+
+  .mat-calendar-body-selected {
+    background-color: var(--y-gold);
+    color: var(--y-black);
+  }
+
+  .mat-calendar-body-today:not(.mat-calendar-body-selected) {
+    box-shadow: inset 0 0 0 1px var(--y-gold);
+  }
+}
+
 @media (max-width: 768px) {
   .y-section-head {
     margin-bottom: 40px;
