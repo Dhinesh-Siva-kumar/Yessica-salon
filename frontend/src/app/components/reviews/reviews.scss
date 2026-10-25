@@ -1,5 +1,8 @@
 .y-reviews {
-  background: var(--y-ivory);
+  background:
+    radial-gradient(900px circle at 100% 0%, rgba(191, 138, 34, .07), transparent 60%),
+    radial-gradient(900px circle at 0% 100%, rgba(191, 138, 34, .06), transparent 60%),
+    var(--y-ivory);
   color: var(--y-black);
   position: relative;
   overflow: hidden;
@@ -52,7 +55,7 @@
       margin: 0;
       font-family: var(--y-font-display);
       font-weight: 500;
-      font-size: 22px;
+      font-size: clamp(22px, 1.3vw, 29px);
       line-height: 1.4;
     }
   }

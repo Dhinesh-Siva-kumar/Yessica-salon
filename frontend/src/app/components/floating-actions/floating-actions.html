@@ -1,0 +1,21 @@
+<div class="y-fab">
+  @if (showScrollTop()) {
+    <button type="button" class="y-fab__btn y-fab__btn--top" (click)="scrollToTop()" aria-label="Scroll to top">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 15l6-6 6 6" />
+      </svg>
+    </button>
+  }
+
+  <a [href]="whatsappUrl" target="_blank" rel="noopener" class="y-fab__btn y-fab__btn--whatsapp" aria-label="Chat on WhatsApp">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12.04 2c-5.52 0-10 4.48-10 10 0 1.76.46 3.45 1.33 4.95L2 22l5.2-1.36a9.96 9.96 0 0 0 4.84 1.23h.01c5.52 0 10-4.48 10-10s-4.48-10-10.01-9.87Zm5.85 14.1c-.25.7-1.45 1.33-2 1.42-.51.08-1.15.11-1.86-.12-.43-.13-.98-.32-1.69-.63-2.97-1.28-4.9-4.27-5.05-4.47-.15-.2-1.2-1.6-1.2-3.05 0-1.45.76-2.17 1.03-2.46.27-.3.6-.37.8-.37.2 0 .4 0 .58.01.19.01.44-.07.68.53.25.6.85 2.07.92 2.22.07.15.12.33.02.53-.1.2-.15.33-.3.5-.15.18-.31.4-.45.54-.15.15-.3.31-.13.6.17.3.77 1.27 1.65 2.06 1.14 1.02 2.1 1.33 2.39 1.48.3.15.47.13.64-.08.17-.2.73-.85.93-1.14.2-.3.39-.24.65-.14.27.1 1.7.8 1.99.95.3.15.49.22.56.34.08.13.08.73-.17 1.43Z" />
+    </svg>
+  </a>
+
+  <a [href]="telHref" class="y-fab__btn y-fab__btn--call" aria-label="Call us">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 5c0-.55.45-1 1-1h2.7c.5 0 .92.37.99.86l.6 4.2a1 1 0 0 1-.28.88l-1.6 1.6a14.6 14.6 0 0 0 6.05 6.05l1.6-1.6a1 1 0 0 1 .88-.28l4.2.6c.49.07.86.5.86.99V20c0 .55-.45 1-1 1h-1.5C9.4 21 3 14.6 3 6.5V5Z" />
+    </svg>
+  </a>
+</div>

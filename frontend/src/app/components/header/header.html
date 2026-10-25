@@ -1,25 +1,26 @@
 <header id="top" class="y-header">
-  <a href="#top" class="y-header__logo">
-    <span class="y-header__name">YESSICA</span>
-    <span class="y-header__sub">UNISEX SALON</span>
-  </a>
+  <div class="y-header__inner">
+    <a href="#top" class="y-header__logo">
+      <img src="/assets/logo-yessica.png" alt="YESSICA Unisex Salon" class="y-header__logo-img">
+    </a>
 
-  <nav id="site-nav" class="y-header__nav" [class.is-open]="menuOpen()" aria-label="Main">
-    @for (link of navLinks; track link.href) {
-      <a [href]="link.href" (click)="closeMenu()">{{ link.label }}</a>
-    }
-  </nav>
+    <nav id="site-nav" class="y-header__nav" [class.is-open]="menuOpen()" aria-label="Main">
+      @for (link of navLinks; track link.href) {
+        <a [href]="link.href" (click)="closeMenu()">{{ link.label }}</a>
+      }
+    </nav>
 
-  <div class="y-header__actions">
-    <a href="#contact" class="y-btn y-btn--gold y-header__book">Book Now</a>
-    <button type="button"
-            class="y-header__toggle"
-            [class.is-open]="menuOpen()"
-            [attr.aria-expanded]="menuOpen()"
-            aria-controls="site-nav"
-            aria-label="Toggle menu"
-            (click)="toggleMenu()">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="y-header__actions">
+      <a href="#contact" class="y-btn y-btn--gold y-header__book">Book Now</a>
+      <button type="button"
+              class="y-header__toggle"
+              [class.is-open]="menuOpen()"
+              [attr.aria-expanded]="menuOpen()"
+              aria-controls="site-nav"
+              aria-label="Toggle menu"
+              (click)="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>

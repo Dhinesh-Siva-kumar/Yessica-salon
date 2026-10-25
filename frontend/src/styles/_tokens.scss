@@ -25,10 +25,29 @@
   --y-font-body: 'Jost', sans-serif;
 
   // Layout
+  // Stays at 1200px through mobile/tablet/laptop, then steps up on wider
+  // viewports so content keeps filling more of the screen on large desktop
+  // monitors and big-screen TVs instead of just leaving the cap flat.
   --y-max-width: 1200px;
   --y-section-pad: 110px 32px;
 }
 
 @media (max-width: 768px) {
   :root { --y-section-pad: 72px 20px; }
+}
+
+@media (min-width: 1366px) {
+  :root { --y-max-width: 1320px; }
+}
+
+@media (min-width: 1600px) {
+  :root { --y-max-width: 1460px; }
+}
+
+@media (min-width: 1920px) {
+  :root { --y-max-width: 1620px; }
+}
+
+@media (min-width: 2560px) {
+  :root { --y-max-width: 1800px; }
 }

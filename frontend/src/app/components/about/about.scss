@@ -74,7 +74,7 @@
       margin: 0;
       font-family: var(--y-font-display);
       font-weight: 600;
-      font-size: 52px;
+      font-size: clamp(52px, 3vw, 68px);
       line-height: 1.08;
     }
 

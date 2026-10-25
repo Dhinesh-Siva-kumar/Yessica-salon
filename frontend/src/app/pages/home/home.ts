@@ -14,6 +14,7 @@ import { BookingCta } from '../../components/booking-cta/booking-cta';
 import { InstagramFeed } from '../../components/instagram-feed/instagram-feed';
 import { Contact } from '../../components/contact/contact';
 import { Footer } from '../../components/footer/footer';
+import { FloatingActions } from '../../components/floating-actions/floating-actions';
 import { DataService } from '../../core/data.service';
 import {
   SERVICES,
@@ -59,6 +60,7 @@ import {
     InstagramFeed,
     Contact,
     Footer,
+    FloatingActions,
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',

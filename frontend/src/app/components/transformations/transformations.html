@@ -35,7 +35,7 @@
            aria-label="Before and after transformations"
            (touchstart)="onTouchStart($event)"
            (touchend)="onTouchEnd($event)">
-        <div class="y-trans__track" [style.transform]="'translateX(-' + (activeIndex * 100) + '%)'">
+        <div class="y-trans__track" [style.transform]="'translateX(-' + (activeIndex * (100 / visibleCount)) + '%)'">
           @for (tr of items; track tr.id) {
             <div class="y-trans__slide">
               <div class="y-trans__pair">
@@ -64,10 +64,10 @@
     </div>
 
     <div class="y-trans__dots">
-      @for (tr of items; track tr.id; let i = $index) {
+      @for (i of dotIndices; track i) {
         <button type="button"
                 class="y-trans__dot"
-                [class.is-active]="i === activeIndex"
+                [class.is-active]="isGroupActive(i)"
                 (click)="goTo(i)"
                 [attr.aria-label]="'Go to transformation ' + (i + 1)"></button>
       }

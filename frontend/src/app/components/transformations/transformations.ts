@@ -14,18 +14,45 @@ export class Transformations implements OnInit, OnDestroy {
   @Input() items: Transformation[] = TRANSFORMATIONS;
 
   activeIndex = 0;
+  visibleCount = 1;
 
   private touchStartX: number | null = null;
   private timer: ReturnType<typeof setInterval> | null = null;
   private pauseCount = 0;
   private reducedMotion = false;
 
+  get groupCount(): number {
+    return Math.ceil(this.items.length / this.visibleCount);
+  }
+
+  get dotIndices(): number[] {
+    return Array.from({ length: this.groupCount }, (_, i) => i);
+  }
+
   ngOnInit(): void {
     this.reducedMotion =
       typeof window !== 'undefined' &&
       !!window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.updateVisibleCount();
     this.startAutoplay();
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.updateVisibleCount();
+  }
+
+  private updateVisibleCount(): void {
+    const count = typeof window !== 'undefined' && window.innerWidth > 860 ? 2 : 1;
+    if (count !== this.visibleCount) {
+      this.visibleCount = count;
+      this.activeIndex = 0;
+    }
+  }
+
+  isGroupActive(groupIndex: number): boolean {
+    return Math.floor(this.activeIndex / this.visibleCount) === groupIndex;
   }
 
   ngOnDestroy(): void {
@@ -37,15 +64,15 @@ export class Transformations implements OnInit, OnDestroy {
   }
 
   next(): void {
-    this.activeIndex = (this.activeIndex + 1) % this.items.length;
+    this.activeIndex = (this.activeIndex + this.visibleCount) % this.items.length;
   }
 
   prev(): void {
-    this.activeIndex = (this.activeIndex - 1 + this.items.length) % this.items.length;
+    this.activeIndex = (this.activeIndex - this.visibleCount + this.items.length) % this.items.length;
   }
 
-  goTo(i: number): void {
-    this.activeIndex = i;
+  goTo(groupIndex: number): void {
+    this.activeIndex = groupIndex * this.visibleCount;
     this.restartAutoplay();
   }
 

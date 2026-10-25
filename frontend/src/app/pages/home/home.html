@@ -26,4 +26,6 @@
 
 <app-contact [contact]="contact() ?? fallback.contact" />
 
-<app-footer />
+<app-footer [contact]="contact() ?? fallback.contact" />
+
+<app-floating-actions [contact]="contact() ?? fallback.contact" />

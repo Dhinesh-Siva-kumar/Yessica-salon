@@ -1,27 +1,42 @@
 <footer class="y-footer">
-  <div class="y-footer__grid">
-    <div class="y-footer__brand">
-      <span class="y-footer__name">YESSICA</span>
-      <span class="y-footer__sub">UNISEX SALON</span>
-      <p>Hair, skin and grooming for everyone, in the heart of Karimugal.</p>
-    </div>
-
-    <div class="y-footer__col">
-      <span class="y-footer__heading">Quick Links</span>
-      @for (link of navLinks; track link.href) {
-        <a [href]="link.href">{{ link.label }}</a>
+  <div class="y-footer__top">
+    <div class="y-footer__hours">
+      <span class="y-footer__heading">Open Hours</span>
+      @for (line of hoursLines; track line) {
+        <p>{{ line }}</p>
       }
     </div>
 
-    <div class="y-footer__col">
-      <span class="y-footer__heading">Follow</span>
-      <a href="https://www.instagram.com/yessicaunisexsalon_karimugal">Instagram</a>
-      <a href="https://maps.app.goo.gl/ChetkNvDAJj8gWCE7">Google Maps</a>
+    <div class="y-footer__brand">
+      <img src="/assets/logo-yessica.png" alt="YESSICA Unisex Salon" class="y-footer__logo-img">
+
+      <div class="y-footer__social">
+        <a [href]="contact.instagramUrl" target="_blank" rel="noopener" aria-label="Instagram" class="y-footer__icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="5" />
+            <circle cx="12" cy="12" r="4.2" />
+            <circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none" />
+          </svg>
+        </a>
+        <a [href]="mapShareUrl" target="_blank" rel="noopener" aria-label="Find us on Google Maps" class="y-footer__icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 21c-4.2-4.2-7-7.7-7-11a7 7 0 1 1 14 0c0 3.3-2.8 6.8-7 11Z" />
+            <circle cx="12" cy="10" r="2.4" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="y-footer__contact">
+      <span class="y-footer__heading">Contact</span>
+      <p>{{ contact.address }}</p>
+      <a [href]="'https://www.instagram.com/' + contact.instagramHandle" target="_blank" rel="noopener">&#64;{{ contact.instagramHandle }}</a>
+      <a [href]="telHref">{{ contact.phone }}</a>
     </div>
   </div>
 
   <div class="y-footer__bottom">
     <span>© {{ year }} YESSICA Unisex Salon. All rights reserved.</span>
-    <span>Designed by [Your company]</span>
+    <span>Designed by Infort Solutions</span>
   </div>
 </footer>

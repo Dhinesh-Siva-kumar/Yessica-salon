@@ -48,9 +48,9 @@
     margin: 0;
     font-family: var(--y-font-display);
     font-weight: 600;
-    font-size: clamp(44px, 7.4vw, 98px);
+    font-size: clamp(44px, 7.4vw, 118px);
     line-height: 1.02;
-    max-width: 900px;
+    max-width: 1080px;
     color: var(--y-soft-white);
 
     &-accent {
@@ -86,6 +86,13 @@
     min-width: 0;
     margin-top: -190px;
     padding: 0 32px 64px clamp(32px, 8vw, 140px);
+    box-sizing: border-box;
+    display: flex;
+  }
+
+  &__panels-inner {
+    width: 100%;
+    max-width: var(--y-max-width);
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -181,5 +188,14 @@
       color: var(--y-soft-white);
       margin-top: 8px;
     }
+  }
+}
+
+@media (max-width: 640px) {
+  // On narrow screens the hero background crops differently than on
+  // desktop — recenter it so the "YESSICA" wall signage stays visible
+  // and centered instead of drifting toward one edge.
+  .y-hero__bg {
+    object-position: 70% 33%;
   }
 }

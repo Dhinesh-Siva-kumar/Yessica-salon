@@ -114,9 +114,9 @@ export const POSTS: Post[] = [
 ];
 
 export const CONTACT: SiteContact = {
-  address: 'YESSICA Unisex Salon, [Full address], Karimugal, Kochi',
-  phone: '[Phone number]',
-  hours: '[Opening hours]',
+  address: 'YESSICA Unisex Salon, Karimugal, Kochi, Keralam 682303',
+  phone: '+91 73062 75778',
+  hours: 'Monday – Sunday: 10 AM – 8 PM',
   mapsUrl: 'https://maps.app.goo.gl/ChetkNvDAJj8gWCE7',
   instagramUrl: 'https://www.instagram.com/yessicaunisexsalon_karimugal',
   instagramHandle: 'yessicaunisexsalon_karimugal',

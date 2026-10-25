@@ -39,16 +39,16 @@ export async function seed(knex: Knex): Promise<void> {
   ]);
 
   await knex('gallery_items').insert([
-    { label: 'Salon reception', img_url: '/assets/reception-desk.jpg', col_span: 2, row_span: 2, sort_order: 0 },
-    { label: 'Hair', col_span: 1, row_span: 1, sort_order: 1 },
-    { label: 'Bridal', col_span: 1, row_span: 2, sort_order: 2 },
-    { label: 'Men', col_span: 1, row_span: 1, sort_order: 3 },
-    { label: 'Colour', col_span: 2, row_span: 1, sort_order: 4 },
-    { label: 'Skin', col_span: 1, row_span: 1, sort_order: 5 },
-    { label: 'Salon interior', col_span: 1, row_span: 1, sort_order: 6 },
-    { label: 'Styling', col_span: 2, row_span: 2, sort_order: 7 },
-    { label: 'Facial', col_span: 1, row_span: 2, sort_order: 8 },
-    { label: 'Grooming', col_span: 1, row_span: 2, sort_order: 9 },
+    { label: 'Salon reception', img_url: '/assets/gallary/yessica_gallary_1.jpeg', col_span: 2, row_span: 2, sort_order: 0 },
+    { label: 'Hair', img_url: '/assets/gallary/yessica_gallary_2.jpeg', col_span: 1, row_span: 1, sort_order: 1 },
+    { label: 'Bridal', img_url: '/assets/gallary/yessica_gallary_3.jpeg', col_span: 1, row_span: 2, sort_order: 2 },
+    { label: 'Men', img_url: '/assets/gallary/yessica_gallary_4.jpeg', col_span: 1, row_span: 1, sort_order: 3 },
+    { label: 'Colour', img_url: '/assets/gallary/yessica_gallary_5.jpeg', col_span: 2, row_span: 1, sort_order: 4 },
+    { label: 'Skin', img_url: '/assets/gallary/yessica_gallary_6.jpeg', col_span: 1, row_span: 1, sort_order: 5 },
+    { label: 'Salon interior', img_url: '/assets/gallary/yessica_gallary_7.jpeg', col_span: 1, row_span: 1, sort_order: 6 },
+    { label: 'Styling', img_url: '/assets/gallary/yessica_gallary_8.jpeg', col_span: 2, row_span: 2, sort_order: 7 },
+    { label: 'Facial', img_url: '/assets/gallary/yessica_gallary_9.jpeg', col_span: 1, row_span: 2, sort_order: 8 },
+    { label: 'Grooming', img_url: '/assets/gallary/yessica_gallary_10.jpeg', col_span: 1, row_span: 2, sort_order: 9 },
   ]);
 
   await knex('transformations').insert([
@@ -121,9 +121,9 @@ export async function seed(knex: Knex): Promise<void> {
     {
       key: 'contact',
       value: JSON.stringify({
-        address: 'YESSICA Unisex Salon, [Full address], Karimugal, Kochi',
-        phone: '[Phone number]',
-        hours: '[Opening hours]',
+        address: 'YESSICA Unisex Salon, Karimugal, Kochi, Keralam 682303',
+        phone: '+91 73062 75778',
+        hours: 'Monday – Sunday: 10 AM – 8 PM',
         mapsUrl: 'https://maps.app.goo.gl/ChetkNvDAJj8gWCE7',
         instagramUrl: 'https://www.instagram.com/yessicaunisexsalon_karimugal',
         instagramHandle: 'yessicaunisexsalon_karimugal',

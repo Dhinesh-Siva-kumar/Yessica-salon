@@ -1,5 +1,8 @@
 .y-offers {
-  background: var(--y-black);
+  background:
+    radial-gradient(900px circle at 100% 0%, rgba(230, 178, 69, .05), transparent 60%),
+    radial-gradient(900px circle at 0% 100%, rgba(230, 178, 69, .04), transparent 60%),
+    var(--y-black);
   overflow: hidden;
 
   &__inner {
@@ -57,7 +60,7 @@
       margin: 0;
       font-family: var(--y-font-display);
       font-weight: 600;
-      font-size: 44px;
+      font-size: clamp(44px, 2.5vw, 56px);
       line-height: 1.1;
       color: var(--y-soft-white);
     }
@@ -68,7 +71,7 @@
   &__price {
     font-family: var(--y-font-display);
     font-weight: 600;
-    font-size: 64px;
+    font-size: clamp(64px, 3.7vw, 82px);
     line-height: 1;
     color: var(--y-gold-light);
   }
@@ -77,7 +80,7 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: rgba(237, 234, 227, .92);
+    background: var(--y-gold-gradient);
     border: none;
     display: flex;
     align-items: center;

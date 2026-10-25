@@ -1,5 +1,8 @@
 .y-feed {
-  background: var(--y-black);
+  background:
+    radial-gradient(900px circle at 100% 0%, rgba(230, 178, 69, .05), transparent 60%),
+    radial-gradient(900px circle at 0% 100%, rgba(230, 178, 69, .04), transparent 60%),
+    var(--y-black);
 
   &__inner {
     max-width: var(--y-max-width);

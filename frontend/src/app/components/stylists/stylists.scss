@@ -1,5 +1,8 @@
 .y-stylists {
-  background: var(--y-ivory);
+  background:
+    radial-gradient(900px circle at 100% 0%, rgba(191, 138, 34, .07), transparent 60%),
+    radial-gradient(900px circle at 0% 100%, rgba(191, 138, 34, .06), transparent 60%),
+    var(--y-ivory);
   color: var(--y-black);
 
   &__inner {
@@ -25,7 +28,7 @@
     align-items: center;
     text-align: center;
 
-    h3 { margin: 0; font-family: var(--y-font-display); font-weight: 600; font-size: 28px; }
+    h3 { margin: 0; font-family: var(--y-font-display); font-weight: 600; font-size: clamp(28px, 1.6vw, 36px); }
     p { margin: 0; color: var(--y-body-ink); font-size: 16px; max-width: 300px; }
   }
 

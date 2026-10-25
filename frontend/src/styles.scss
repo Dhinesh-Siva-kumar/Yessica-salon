@@ -64,6 +64,9 @@ img { max-width: 100%; display: block; }
   letter-spacing: 0.4em;
   text-transform: uppercase;
   color: var(--y-gold);
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .y-section-head {
@@ -78,7 +81,7 @@ img { max-width: 100%; display: block; }
     margin: 0;
     font-family: var(--y-font-display);
     font-weight: 600;
-    font-size: 52px;
+    font-size: clamp(52px, 3vw, 68px);
     line-height: 1.08;
   }
 }
