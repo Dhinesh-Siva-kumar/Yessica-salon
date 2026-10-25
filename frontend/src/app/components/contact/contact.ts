@@ -4,7 +4,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { DataService } from '../../core/data.service';
 import { SiteContact } from '../../core/models';
 import { CONTACT, SERVICES } from '../../core/fallback-data';
 
@@ -21,7 +20,6 @@ import { CONTACT, SERVICES } from '../../core/fallback-data';
 })
 export class Contact {
   private readonly fb = inject(FormBuilder);
-  private readonly data = inject(DataService);
   private readonly snackBar = inject(MatSnackBar);
   private readonly sanitizer = inject(DomSanitizer);
 
@@ -124,25 +122,10 @@ export class Contact {
     const raw = this.form.getRawValue();
     const preferredDate = raw.preferredDate as Date;
 
-    this.data.createBooking({
-      name: raw.name,
-      phone: raw.phone,
-      service: raw.service,
-      preferredDate: this.toIsoDate(preferredDate),
-      preferredTime: raw.preferredTime,
-      notes: raw.notes,
-    }).subscribe({
-      next: () => {
-        this.submitting.set(false);
-        this.openWhatsAppDm({ ...raw, preferredDate });
-        this.form.reset();
-        this.snackBar.open('Thanks — we\'ll confirm your appointment shortly.', 'Close', { duration: 5000 });
-      },
-      error: () => {
-        this.submitting.set(false);
-        this.snackBar.open('Could not send your booking. Please call us instead.', 'Close', { duration: 5000 });
-      },
-    });
+    this.openWhatsAppDm({ ...raw, preferredDate });
+    this.form.reset();
+    this.submitting.set(false);
+    this.snackBar.open('WhatsApp opened with your appointment details — just hit send!', 'Close', { duration: 5000 });
   }
 
   private openWhatsAppDm(raw: {
@@ -173,13 +156,6 @@ export class Contact {
     const salonNumber = this.contact.phone.replace(/\D/g, '');
     const url = `https://wa.me/${salonNumber}?text=${encodeURIComponent(lines.join('\n'))}`;
     window.open(url, '_blank');
-  }
-
-  private toIsoDate(date: Date): string {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
   }
 }
 
