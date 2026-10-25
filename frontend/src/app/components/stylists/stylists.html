@@ -1,0 +1,24 @@
+<section class="y-stylists">
+  <div class="y-stylists__inner">
+    <div class="y-section-head">
+      <span class="y-eyebrow y-eyebrow--ink">Our Team</span>
+      <h2>Meet the stylists</h2>
+      <div class="y-divider"></div>
+    </div>
+
+    <div class="y-stylists__grid">
+      @for (person of stylists; track person.id) {
+        <div class="y-stylists__card">
+          <div class="y-stylists__photo" [style.background-image]="person.imgUrl ? 'url(' + person.imgUrl + ')' : null">
+            @if (!person.imgUrl) {
+              <span>{{ person.initials }}</span>
+            }
+          </div>
+          <h3>{{ person.name }}</h3>
+          <span class="y-stylists__role">{{ person.role }}</span>
+          <p>{{ person.text }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,27 @@
+<footer class="y-footer">
+  <div class="y-footer__grid">
+    <div class="y-footer__brand">
+      <span class="y-footer__name">YESSICA</span>
+      <span class="y-footer__sub">UNISEX SALON</span>
+      <p>Hair, skin and grooming for everyone, in the heart of Karimugal.</p>
+    </div>
+
+    <div class="y-footer__col">
+      <span class="y-footer__heading">Quick Links</span>
+      @for (link of navLinks; track link.href) {
+        <a [href]="link.href">{{ link.label }}</a>
+      }
+    </div>
+
+    <div class="y-footer__col">
+      <span class="y-footer__heading">Follow</span>
+      <a href="https://www.instagram.com/yessicaunisexsalon_karimugal">Instagram</a>
+      <a href="https://maps.app.goo.gl/ChetkNvDAJj8gWCE7">Google Maps</a>
+    </div>
+  </div>
+
+  <div class="y-footer__bottom">
+    <span>© {{ year }} YESSICA Unisex Salon. All rights reserved.</span>
+    <span>Designed by [Your company]</span>
+  </div>
+</footer>

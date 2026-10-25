@@ -1,0 +1,29 @@
+<app-header />
+
+<app-hero [stats]="stats()" />
+
+<app-about />
+
+<app-services [services]="services() ?? fallback.services" />
+
+<app-why-choose [items]="whyItems() ?? fallback.whyItems" />
+
+<app-reels-carousel [reels]="reels() ?? fallback.reels" />
+
+<app-transformations [items]="transformations() ?? fallback.transformations" />
+
+<app-stylists [stylists]="stylists() ?? fallback.stylists" />
+
+<app-offers-slider [offers]="offers() ?? fallback.offers" />
+
+<app-gallery [tiles]="gallery() ?? fallback.gallery" />
+
+<app-reviews [reviews]="reviews() ?? fallback.reviews" [stats]="stats()" />
+
+<app-booking-cta />
+
+<app-instagram-feed [posts]="posts() ?? fallback.posts" />
+
+<app-contact [contact]="contact() ?? fallback.contact" />
+
+<app-footer />

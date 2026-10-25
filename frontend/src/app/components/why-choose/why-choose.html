@@ -1,0 +1,30 @@
+<section id="why" class="y-why">
+  <svg viewBox="0 0 200 267" class="y-why__mark y-why__mark--top" xmlns="http://www.w3.org/2000/svg">
+    <text x="100" y="215" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-weight="600" font-size="280" fill="#BF8A22" opacity="0.07">Y</text>
+  </svg>
+
+  <div class="y-why__inner">
+    <div class="y-section-head">
+      <span class="y-eyebrow y-eyebrow--ink">Why Choose YESSICA</span>
+      <h2>The YESSICA difference</h2>
+      <div class="y-divider"></div>
+    </div>
+
+    <div class="y-why__grid">
+      @for (item of items; track item.id) {
+        <div class="y-why__card">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#BF8A22" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <path [attr.d]="item.iconPath" />
+          </svg>
+          <div class="y-why__rule"></div>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.text }}</p>
+        </div>
+      }
+    </div>
+  </div>
+
+  <svg viewBox="0 0 200 267" class="y-why__mark y-why__mark--bottom" xmlns="http://www.w3.org/2000/svg">
+    <text x="100" y="215" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-weight="600" font-size="280" fill="#BF8A22" opacity="0.07">Y</text>
+  </svg>
+</section>

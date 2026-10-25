@@ -1,0 +1,14 @@
+<header id="top" class="y-header">
+  <a href="#top" class="y-header__logo">
+    <span class="y-header__name">YESSICA</span>
+    <span class="y-header__sub">UNISEX SALON</span>
+  </a>
+
+  <nav class="y-header__nav">
+    @for (link of navLinks; track link.href) {
+      <a [href]="link.href">{{ link.label }}</a>
+    }
+  </nav>
+
+  <a href="#contact" class="y-btn y-btn--gold">Book Now</a>
+</header>

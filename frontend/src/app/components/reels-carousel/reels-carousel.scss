@@ -1,0 +1,275 @@
+.y-reels {
+  background: var(--y-black);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+
+  &__pattern {
+    position: absolute;
+    top: -190px;
+    left: -190px;
+    width: 760px;
+    height: 760px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 1;
+    max-width: var(--y-max-width);
+    margin: 0 auto;
+    padding: var(--y-section-pad);
+  }
+
+  &__arrow {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(237, 234, 227, .92);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .5);
+    cursor: pointer;
+    flex: none;
+  }
+
+  &__follow { text-align: center; margin-top: 40px; }
+}
+
+// ---------- 3D perspective carousel ----------
+.y-reels3d {
+  --y-r3d-card-w: 272px;
+  --y-r3d-card-h: 435px;
+  --y-r3d-gap: 190px;
+  --y-r3d-rotate: 32deg;
+  --y-r3d-depth: -170px;
+  --y-r3d-scale-1: 0.85;
+  --y-r3d-scale-2: 0.7;
+  --y-r3d-dur: 550ms;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  outline: none;
+
+  &:focus-visible .y-reels3d__stage {
+    outline: 1px solid rgba(230, 178, 69, .5);
+    outline-offset: 10px;
+    border-radius: 1.6em;
+  }
+
+  &__stage {
+    position: relative;
+    flex: 1 1 auto;
+    min-width: 0;
+    height: calc(var(--y-r3d-card-h) + 60px);
+    perspective: 1400px;
+    overflow: hidden;
+    touch-action: pan-y;
+  }
+
+  &__slot {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--y-r3d-dur) cubic-bezier(.22, 1, .36, 1), opacity var(--y-r3d-dur) ease;
+    will-change: transform, opacity;
+    // The slot's own box still spans the full stage after a transform (only its
+    // *painted* position moves), so it would otherwise sit on top of neighbouring
+    // cards and swallow their clicks. Only the card itself should be clickable.
+    pointer-events: none;
+
+    // center (active)
+    &[data-offset="0"] { transform: translateX(0) translateZ(0) rotateY(0deg) scale(1); opacity: 1; z-index: 6; }
+
+    // immediate neighbours
+    &[data-offset="-1"] { transform: translateX(calc(-1 * var(--y-r3d-gap))) translateZ(var(--y-r3d-depth)) rotateY(var(--y-r3d-rotate)) scale(var(--y-r3d-scale-1)); opacity: .85; z-index: 5; }
+    &[data-offset="1"] { transform: translateX(var(--y-r3d-gap)) translateZ(var(--y-r3d-depth)) rotateY(calc(-1 * var(--y-r3d-rotate))) scale(var(--y-r3d-scale-1)); opacity: .85; z-index: 5; }
+
+    // outer cards
+    &[data-offset="-2"] { transform: translateX(calc(-2 * var(--y-r3d-gap))) translateZ(calc(var(--y-r3d-depth) * 1.7)) rotateY(var(--y-r3d-rotate)) scale(var(--y-r3d-scale-2)); opacity: .55; z-index: 4; }
+    &[data-offset="2"] { transform: translateX(calc(2 * var(--y-r3d-gap))) translateZ(calc(var(--y-r3d-depth) * 1.7)) rotateY(calc(-1 * var(--y-r3d-rotate))) scale(var(--y-r3d-scale-2)); opacity: .55; z-index: 4; }
+
+    // anything further out (only relevant if more than 5 cards) — tucked away, invisible
+    &:not([data-offset="-2"]):not([data-offset="-1"]):not([data-offset="0"]):not([data-offset="1"]):not([data-offset="2"]) {
+      transform: translateX(0) translateZ(calc(var(--y-r3d-depth) * 2)) scale(.5);
+      opacity: 0;
+      z-index: 1;
+
+      .y-reels3d__card { pointer-events: none; }
+    }
+  }
+
+  &__card {
+    position: relative;
+    width: var(--y-r3d-card-w);
+    height: var(--y-r3d-card-h);
+    border-radius: 1.6em;
+    overflow: hidden;
+    background: linear-gradient(170deg, var(--y-slate), var(--y-charcoal) 75%);
+    background-size: cover;
+    background-position: 50% 25%;
+    border: 1px solid rgba(230, 178, 69, .35);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: auto;
+
+    &:focus-visible { border-color: var(--y-gold); }
+
+    &.is-playing {
+      cursor: default;
+      background-image: none !important;
+    }
+  }
+
+  &__slot[data-offset="0"] .y-reels3d__card:hover {
+    border-color: var(--y-gold);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .55), 0 0 0 1px rgba(230, 178, 69, .35);
+  }
+
+  &__shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(13, 13, 13, .85) 0%, rgba(13, 13, 13, .25) 45%, rgba(13, 13, 13, .45) 100%);
+  }
+
+  &__play {
+    position: relative;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: linear-gradient(160deg, rgba(230, 178, 69, .22), var(--y-black) 85%);
+    border: 1px solid rgba(230, 178, 69, .25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__arrow {
+    z-index: 10;
+  }
+
+  // Reset the blockquote embed.js replaces; a sensible look before/if it processes.
+  &__embed.instagram-media {
+    margin: 0 !important;
+    min-width: 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100%;
+    background: var(--y-charcoal);
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+    a {
+      display: block;
+      padding: 20px;
+      text-align: center;
+      font-family: var(--y-font-label);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--y-gold-light);
+    }
+  }
+
+  &__fallback {
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%);
+    z-index: 2;
+    background: rgba(13, 13, 13, .82);
+    border: 1px solid rgba(230, 178, 69, .4);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-family: var(--y-font-label);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--y-gold-light);
+    white-space: nowrap;
+
+    &:hover { color: var(--y-gold); border-color: var(--y-gold); }
+  }
+
+  &__dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 28px;
+  }
+
+  &__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid rgba(230, 178, 69, .45);
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    transition: background .25s ease, transform .25s ease, width .25s ease;
+
+    &.is-active {
+      background: var(--y-gold-gradient);
+      border-color: transparent;
+      width: 22px;
+      border-radius: 4px;
+    }
+  }
+}
+
+@media (max-width: 860px) {
+  .y-reels3d {
+    gap: 8px;
+
+    --y-r3d-card-w: 190px;
+    --y-r3d-card-h: 305px;
+    --y-r3d-gap: 108px;
+    --y-r3d-rotate: 24deg;
+    --y-r3d-depth: -110px;
+    --y-r3d-scale-1: 0.8;
+    --y-r3d-scale-2: 0.62;
+  }
+
+  .y-reels3d__arrow {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 520px) {
+  .y-reels3d {
+    --y-r3d-card-w: 158px;
+    --y-r3d-card-h: 255px;
+    --y-r3d-gap: 78px;
+    --y-r3d-rotate: 18deg;
+    --y-r3d-depth: -80px;
+    --y-r3d-scale-1: 0.78;
+    --y-r3d-scale-2: 0.6;
+  }
+
+  .y-reels3d__play {
+    width: 56px;
+    height: 56px;
+
+    svg { width: 34px; height: 34px; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .y-reels3d__slot {
+    transition: opacity var(--y-r3d-dur) ease;
+  }
+}

@@ -1,0 +1,130 @@
+.y-offers {
+  background: var(--y-black);
+  overflow: hidden;
+
+  &__inner {
+    max-width: var(--y-max-width);
+    margin: 0 auto;
+    padding: 96px 32px;
+  }
+
+  &__carousel {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__viewport {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    outline: none;
+  }
+
+  &__track {
+    display: flex;
+    width: 100%;
+    transition: transform 620ms cubic-bezier(.22, 1, .36, 1);
+  }
+
+  &__card {
+    flex: 0 0 100%;
+    min-width: 0;
+    border: 1px solid var(--y-gold);
+    padding: 64px 48px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--y-charcoal), var(--y-black));
+    min-height: 300px;
+    opacity: 0;
+    transition: opacity 620ms ease;
+
+    &.is-active {
+      opacity: 1;
+    }
+  }
+
+  &__copy {
+    flex: 1 1 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    h2 {
+      margin: 0;
+      font-family: var(--y-font-display);
+      font-weight: 600;
+      font-size: 44px;
+      line-height: 1.1;
+      color: var(--y-soft-white);
+    }
+
+    p { margin: 0; color: var(--y-grey); font-size: 16px; }
+  }
+
+  &__price {
+    font-family: var(--y-font-display);
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 1;
+    color: var(--y-gold-light);
+  }
+
+  &__arrow {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(237, 234, 227, .92);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .5);
+    cursor: pointer;
+    flex: none;
+    transition: transform .2s ease, box-shadow .2s ease;
+
+    &:hover {
+      transform: scale(1.06);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, .5), 0 0 0 1px rgba(230, 178, 69, .35);
+    }
+  }
+
+  &__dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 28px;
+  }
+
+  &__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid rgba(230, 178, 69, .45);
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    transition: background .25s ease, transform .25s ease, width .25s ease;
+
+    &.is-active {
+      background: var(--y-gold-gradient);
+      border-color: transparent;
+      width: 22px;
+      border-radius: 4px;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .y-offers__track {
+    transition: none;
+  }
+
+  .y-offers__card {
+    transition: none;
+  }
+}

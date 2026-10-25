@@ -1,0 +1,26 @@
+<section id="gallery" class="y-gallery">
+  <div class="y-gallery__inner">
+    <div class="y-section-head">
+      <span class="y-eyebrow">Gallery</span>
+      <h2>Moments of style</h2>
+      <div class="y-divider"></div>
+    </div>
+
+    <div class="y-gallery__grid">
+      @for (tile of tiles; track tile.id) {
+        <div class="y-gallery__tile"
+             [style.grid-column]="'span ' + tile.colSpan"
+             [style.grid-row]="'span ' + tile.rowSpan"
+             [style.background-image]="tile.imgUrl ? 'url(' + tile.imgUrl + ')' : null">
+          @if (!tile.imgUrl) {
+            <span>{{ tile.label }}</span>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="y-gallery__more">
+      <a href="#gallery" class="y-btn y-btn--outline">View Full Gallery</a>
+    </div>
+  </div>
+</section>

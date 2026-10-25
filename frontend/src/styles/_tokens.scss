@@ -1,0 +1,30 @@
+// YESSICA Unisex Salon — design tokens
+// Values taken directly from the source design (see YESSICA-Landing-Page-Tech-Spec.md)
+
+:root {
+  // Core palette
+  --y-black: #0D0D0D;
+  --y-charcoal: #1A1A1A;
+  --y-slate: #2C2C2C;
+  --y-gold: #E6B245;
+  --y-gold-light: #F2CE7D;
+  --y-gold-deep: #BF8A22;
+  --y-gold-ink: #855A0C; // gold text/links on ivory sections
+  --y-ivory: #F6F2EA;
+  --y-soft-white: #EDEAE3;
+  --y-grey: #9A9A96;
+  --y-body-ink: #4A4741; // body copy on ivory sections
+
+  --y-gold-gradient: linear-gradient(135deg, var(--y-gold-light), var(--y-gold) 60%, var(--y-gold-deep));
+  --y-gold-gradient-v: linear-gradient(180deg, var(--y-gold-light), var(--y-gold) 55%, var(--y-gold-deep));
+  --y-divider-gradient: linear-gradient(90deg, var(--y-gold-deep), var(--y-gold-light));
+
+  // Fonts
+  --y-font-display: 'Cormorant Garamond', serif;
+  --y-font-label: 'Montserrat', sans-serif;
+  --y-font-body: 'Jost', sans-serif;
+
+  // Layout
+  --y-max-width: 1200px;
+  --y-section-pad: 110px 32px;
+}

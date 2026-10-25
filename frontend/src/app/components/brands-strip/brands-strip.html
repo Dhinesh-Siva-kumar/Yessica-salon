@@ -1,0 +1,12 @@
+<div class="y-brands">
+  <span class="y-eyebrow y-eyebrow--ink y-brands__label">Our Professional Brands</span>
+  <div class="y-brands__row">
+    @for (brand of brands; track brand.id) {
+      <img [src]="brand.logoUrl" [alt]="brand.name" [style.height.px]="brand.heightPx">
+    }
+    <div class="y-brands__o3">
+      <span class="y-brands__o3-mark">O3+</span>
+      <span class="y-brands__o3-label">Professional</span>
+    </div>
+  </div>
+</div>

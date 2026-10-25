@@ -1,0 +1,59 @@
+.y-stylists {
+  background: var(--y-ivory);
+  color: var(--y-black);
+
+  &__inner {
+    max-width: var(--y-max-width);
+    margin: 0 auto;
+    padding: var(--y-section-pad);
+  }
+
+  &__grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: center;
+  }
+
+  &__card {
+    flex: 1 1 280px;
+    max-width: 360px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    text-align: center;
+
+    h3 { margin: 0; font-family: var(--y-font-display); font-weight: 600; font-size: 28px; }
+    p { margin: 0; color: var(--y-body-ink); font-size: 16px; max-width: 300px; }
+  }
+
+  &__photo {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    background: linear-gradient(150deg, var(--y-slate), var(--y-black));
+    background-size: cover;
+    background-position: 50% 25%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      font-family: var(--y-font-display);
+      font-weight: 600;
+      font-size: 40px;
+      color: var(--y-gold);
+    }
+  }
+
+  &__role {
+    font-family: var(--y-font-label);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--y-gold-ink);
+  }
+}

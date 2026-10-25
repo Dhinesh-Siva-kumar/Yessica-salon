@@ -1,0 +1,65 @@
+.y-why {
+  background: var(--y-ivory);
+  color: var(--y-black);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+
+  &__mark {
+    position: absolute;
+    width: 220px;
+    height: 293px;
+    pointer-events: none;
+    z-index: -1;
+
+    &--top {
+      top: -75px;
+      right: -78px;
+      transform: rotate(180deg);
+    }
+
+    &--bottom {
+      bottom: -75px;
+      left: -78px;
+    }
+  }
+
+  &__inner {
+    max-width: var(--y-max-width);
+    margin: 0 auto;
+    padding: var(--y-section-pad);
+  }
+
+  &__grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px 32px;
+  }
+
+  &__card {
+    flex: 1 1 240px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    text-align: center;
+
+    h3 {
+      margin: 0;
+      font-family: var(--y-font-display);
+      font-weight: 600;
+      font-size: 28px;
+      line-height: 1.15;
+    }
+
+    p { margin: 0; color: var(--y-body-ink); font-size: 16px; }
+  }
+
+  &__rule {
+    width: 100%;
+    height: 0;
+    margin: 4px 0 6px;
+    border-top: 1px solid var(--y-gold-deep);
+  }
+}

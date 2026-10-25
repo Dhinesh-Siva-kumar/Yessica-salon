@@ -1,0 +1,47 @@
+<section id="offers" class="y-offers">
+  <div class="y-offers__inner">
+    <div class="y-offers__carousel">
+      <button type="button" class="y-offers__arrow y-offers__arrow--prev" (click)="prev()" aria-label="Previous offer">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D0D0D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 5L8 12L15 19" />
+        </svg>
+      </button>
+
+      <div class="y-offers__viewport"
+           tabindex="0"
+           role="group"
+           aria-label="Offers and packages"
+           (touchstart)="onTouchStart($event)"
+           (touchend)="onTouchEnd($event)">
+        <div class="y-offers__track" [style.transform]="'translateX(-' + (activeIndex * 100) + '%)'">
+          @for (offer of offers; track offer.id; let i = $index) {
+            <div class="y-offers__card" [class.is-active]="i === activeIndex">
+              <div class="y-offers__copy">
+                <span class="y-eyebrow">Offers &amp; Packages · {{ offer.n }} / {{ total.toString().padStart(2, '0') }}</span>
+                <h2>{{ offer.title }}</h2>
+                <p>Use the arrows, dots, or swipe for the next offer.</p>
+              </div>
+              <div class="y-offers__price">{{ offer.price }}</div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <button type="button" class="y-offers__arrow y-offers__arrow--next" (click)="next()" aria-label="Next offer">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D0D0D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 5L16 12L9 19" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="y-offers__dots">
+      @for (offer of offers; track offer.id; let i = $index) {
+        <button type="button"
+                class="y-offers__dot"
+                [class.is-active]="i === activeIndex"
+                (click)="goTo(i)"
+                [attr.aria-label]="'Go to offer ' + (i + 1)"></button>
+      }
+    </div>
+  </div>
+</section>

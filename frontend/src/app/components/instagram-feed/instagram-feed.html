@@ -1,0 +1,21 @@
+<section class="y-feed">
+  <div class="y-feed__inner">
+    <div class="y-section-head">
+      <span class="y-eyebrow">&#64;{{ instagramHandle }}</span>
+      <h2>Latest from Instagram</h2>
+      <div class="y-divider"></div>
+    </div>
+
+    <div class="y-feed__grid">
+      @for (post of posts; track post.id) {
+        <div class="y-feed__tile">
+          <span>{{ post.label }}</span>
+        </div>
+      }
+    </div>
+
+    <div class="y-feed__more">
+      <a [href]="'https://www.instagram.com/' + instagramHandle" class="y-btn y-btn--outline">Follow on Instagram</a>
+    </div>
+  </div>
+</section>

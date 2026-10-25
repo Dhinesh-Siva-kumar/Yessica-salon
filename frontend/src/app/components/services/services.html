@@ -1,0 +1,56 @@
+<section id="services" class="y-services">
+  <svg viewBox="0 0 1440 900" preserveAspectRatio="none" class="y-services__lines" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#C9A24B" stroke-linecap="round" stroke-width="1.5" opacity="0.4">
+      <path d="M1240 0 L1240 126" />
+      <path d="M1290 0 L1290 206" />
+      <path d="M1340 0 L1340 86" />
+      <path d="M1390 0 L1390 266" />
+      <path d="M1430 0 L1430 166" />
+      <path d="M10 900 L10 734" />
+      <path d="M50 900 L50 634" />
+      <path d="M100 900 L100 814" />
+      <path d="M150 900 L150 694" />
+      <path d="M200 900 L200 774" />
+    </g>
+    <g fill="#C9A24B" opacity="0.9">
+      <circle cx="1240" cy="140" r="2.5" />
+      <circle cx="1290" cy="220" r="2.5" />
+      <circle cx="1340" cy="100" r="2.5" />
+      <circle cx="1390" cy="280" r="2.5" />
+      <circle cx="1430" cy="180" r="2.5" />
+      <circle cx="10" cy="720" r="2.5" />
+      <circle cx="50" cy="620" r="2.5" />
+      <circle cx="100" cy="800" r="2.5" />
+      <circle cx="150" cy="680" r="2.5" />
+      <circle cx="200" cy="760" r="2.5" />
+    </g>
+  </svg>
+
+  <div class="y-services__inner">
+    <div class="y-section-head">
+      <span class="y-eyebrow">Signature Services</span>
+      <h2>Crafted for you</h2>
+      <div class="y-divider"></div>
+    </div>
+
+    <div class="y-services__grid">
+      @for (svc of services; track svc.id) {
+        <div class="y-services__card">
+          @if (svc.imgUrl) {
+            <img [src]="svc.imgUrl" alt="" class="y-services__photo">
+            <div class="y-services__fade-v"></div>
+            <div class="y-services__fade-h"></div>
+          }
+          <span class="y-services__n">{{ svc.n }}</span>
+          <h3>{{ svc.title }}</h3>
+          <p>{{ svc.text }}</p>
+          <a href="#contact">Book this service →</a>
+        </div>
+      }
+    </div>
+
+    <div class="y-services__more">
+      <a href="#offers" class="y-btn y-btn--outline">View All Services &amp; Prices</a>
+    </div>
+  </div>
+</section>
