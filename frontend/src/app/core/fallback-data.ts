@@ -60,6 +60,8 @@ export const STYLISTS: Stylist[] = [
   { id: 1, name: 'Arjun Kumar', role: 'Senior Hair Stylist', text: 'Expert in precision haircuts, modern fades, and personalized styling.', initials: 'AK', imgUrl: '/assets/stylists/arjun-kumar.jpg' },
   { id: 2, name: 'Priya Nair', role: 'Hair Color & Transformation Expert', text: 'Specializes in balayage, global coloring, highlights, and hair transformations.', initials: 'PN', imgUrl: '/assets/stylists/priya-nair.jpg' },
   { id: 3, name: 'Meera Lakshmi', role: 'Skin & Beauty Specialist', text: 'Passionate about facials, skincare treatments, and bridal beauty services.', initials: 'ML', imgUrl: '/assets/stylists/meera-lakshmi.jpg' },
+  { id: 4, name: 'Rahul Menon', role: 'Barber & Grooming Specialist', text: 'Sharp cuts, beard styling, and grooming for the modern gentleman.', initials: 'RM', imgUrl: '/assets/stylists/rahul-menon.jpg' },
+  { id: 5, name: 'Anjali Das', role: 'Bridal & Makeup Artist', text: 'Creates polished bridal looks, party makeup, and hair styling for special days.', initials: 'AD', imgUrl: '/assets/stylists/anjali-das.jpg' },
 ];
 
 export const OFFERS: Offer[] = [
@@ -74,16 +76,16 @@ export const OFFERS: Offer[] = [
 ];
 
 export const GALLERY_TILES: GalleryTile[] = [
-  { id: 0, colSpan: 2, rowSpan: 2, label: 'Salon reception', imgUrl: '/assets/gallary/yessica_gallary_1.jpeg' },
+  { id: 0, colSpan: 2, rowSpan: 2, label: 'Salon reception', imgUrl: '/assets/gallary/yessica_gallary_1.jpg' },
   { id: 1, colSpan: 1, rowSpan: 1, label: 'Hair', imgUrl: '/assets/gallary/yessica_gallary_2.jpeg' },
   { id: 2, colSpan: 1, rowSpan: 2, label: 'Bridal', imgUrl: '/assets/gallary/yessica_gallary_3.jpeg' },
-  { id: 3, colSpan: 1, rowSpan: 1, label: 'Men', imgUrl: '/assets/gallary/yessica_gallary_4.jpeg' },
-  { id: 4, colSpan: 2, rowSpan: 1, label: 'Colour', imgUrl: '/assets/gallary/yessica_gallary_5.jpeg' },
-  { id: 5, colSpan: 1, rowSpan: 1, label: 'Skin', imgUrl: '/assets/gallary/yessica_gallary_6.jpeg' },
-  { id: 6, colSpan: 1, rowSpan: 1, label: 'Salon interior', imgUrl: '/assets/gallary/yessica_gallary_7.jpeg' },
-  { id: 7, colSpan: 2, rowSpan: 2, label: 'Styling', imgUrl: '/assets/gallary/yessica_gallary_8.jpeg' },
-  { id: 8, colSpan: 1, rowSpan: 2, label: 'Facial', imgUrl: '/assets/gallary/yessica_gallary_9.jpeg' },
-  { id: 9, colSpan: 1, rowSpan: 2, label: 'Grooming', imgUrl: '/assets/gallary/yessica_gallary_10.jpeg' },
+  { id: 3, colSpan: 1, rowSpan: 1, label: 'Men', imgUrl: '/assets/gallary/yessica_gallary_4.jpg' },
+  { id: 4, colSpan: 2, rowSpan: 1, label: 'Styling', imgUrl: '/assets/gallary/yessica_gallary_5.jpeg' },
+  { id: 5, colSpan: 1, rowSpan: 1, label: 'Blow Dry', imgUrl: '/assets/gallary/yessica_gallary_6.jpeg' },
+  { id: 6, colSpan: 1, rowSpan: 1, label: 'Hair Botox', imgUrl: '/assets/gallary/yessica_gallary_7.jpeg' },
+  { id: 7, colSpan: 2, rowSpan: 2, label: 'Colour', imgUrl: '/assets/gallary/yessica_gallary_8.jpeg' },
+  { id: 8, colSpan: 1, rowSpan: 2, label: 'Layer Cut', imgUrl: '/assets/gallary/yessica_gallary_9.jpeg' },
+  { id: 9, colSpan: 1, rowSpan: 2, label: 'Hair Color', imgUrl: '/assets/gallary/yessica_gallary_10.jpeg' },
 ];
 
 export const REVIEWS: Review[] = [

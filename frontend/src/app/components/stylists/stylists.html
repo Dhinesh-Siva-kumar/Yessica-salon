@@ -8,15 +8,17 @@
 
     <div class="y-stylists__grid">
       @for (person of stylists; track person.id) {
-        <div class="y-stylists__card">
+        <div class="y-stylists__card" tabindex="0">
           <div class="y-stylists__photo" [style.background-image]="person.imgUrl ? 'url(' + person.imgUrl + ')' : null">
             @if (!person.imgUrl) {
-              <span>{{ person.initials }}</span>
+              <span class="y-stylists__initials">{{ person.initials }}</span>
             }
+            <div class="y-stylists__info">
+              <h3>{{ person.name }}</h3>
+              <span class="y-stylists__role">{{ person.role }}</span>
+              <p>{{ person.text }}</p>
+            </div>
           </div>
-          <h3>{{ person.name }}</h3>
-          <span class="y-stylists__role">{{ person.role }}</span>
-          <p>{{ person.text }}</p>
         </div>
       }
     </div>

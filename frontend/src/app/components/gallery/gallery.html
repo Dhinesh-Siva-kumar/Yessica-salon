@@ -9,9 +9,15 @@
     <div class="y-gallery__grid">
       @for (tile of tiles; track tile.id) {
         <div class="y-gallery__tile"
+             [class.y-gallery__tile--clickable]="!!tile.imgUrl"
+             [attr.role]="tile.imgUrl ? 'button' : null"
+             [attr.tabindex]="tile.imgUrl ? 0 : null"
+             [attr.aria-label]="tile.imgUrl ? 'View ' + tile.label : null"
              [style.grid-column]="'span ' + tile.colSpan"
              [style.grid-row]="'span ' + tile.rowSpan"
-             [style.background-image]="tile.imgUrl ? 'url(' + tile.imgUrl + ')' : null">
+             [style.background-image]="tile.imgUrl ? 'url(' + tile.imgUrl + ')' : null"
+             (click)="open(tile)"
+             (keydown.enter)="open(tile)">
           @if (!tile.imgUrl) {
             <span>{{ tile.label }}</span>
           }
@@ -23,4 +29,33 @@
       <a href="#gallery" class="y-btn y-btn--outline">View Full Gallery</a>
     </div>
   </div>
+
+  @if (current(); as item) {
+    <div class="y-viewer" role="dialog" aria-modal="true" aria-label="Gallery image viewer">
+      <div class="y-viewer__backdrop" (click)="close()"></div>
+
+      <button type="button" class="y-viewer__close" aria-label="Close" (click)="close()">&times;</button>
+
+      <div class="y-viewer__stage" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)">
+        <button type="button" class="y-viewer__nav y-viewer__nav--prev" aria-label="Previous image" (click)="prev()">&#8249;</button>
+        <img class="y-viewer__img" [src]="item.imgUrl" [alt]="item.label" draggable="false" />
+        <button type="button" class="y-viewer__nav y-viewer__nav--next" aria-label="Next image" (click)="next()">&#8250;</button>
+      </div>
+
+      <div class="y-viewer__caption">
+        <span>{{ item.label }}</span>
+        <span class="y-viewer__count">{{ activeIndex()! + 1 }} / {{ viewable().length }}</span>
+      </div>
+
+      <div class="y-viewer__thumbs">
+        @for (t of viewable(); track t.id; let i = $index) {
+          <button type="button" class="y-viewer__thumb"
+                  [class.is-active]="i === activeIndex()"
+                  [attr.aria-label]="'Show ' + t.label"
+                  [style.background-image]="'url(' + t.imgUrl + ')'"
+                  (click)="goTo(i)"></button>
+        }
+      </div>
+    </div>
+  }
 </section>

@@ -1,4 +1,7 @@
 .y-stylists {
+  --y-card-h: 440px;
+  --y-card-h-hover: 560px;
+
   background:
     radial-gradient(900px circle at 100% 0%, rgba(191, 138, 34, .07), transparent 60%),
     radial-gradient(900px circle at 0% 100%, rgba(191, 138, 34, .06), transparent 60%),
@@ -14,40 +17,71 @@
   &__grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 32px;
+    gap: 20px;
     justify-content: center;
+    align-items: flex-start;
   }
 
   &__card {
-    flex: 1 1 280px;
-    max-width: 360px;
+    flex: 1 1 240px;
+    max-width: 320px;
     min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    align-items: center;
-    text-align: center;
-
-    h3 { margin: 0; font-family: var(--y-font-display); font-weight: 600; font-size: clamp(28px, 1.6vw, 36px); }
-    p { margin: 0; color: var(--y-body-ink); font-size: 16px; max-width: 300px; }
+    outline: none;
   }
 
   &__photo {
+    position: relative;
     width: 100%;
-    aspect-ratio: 4 / 5;
+    height: var(--y-card-h);
     background: linear-gradient(150deg, var(--y-slate), var(--y-black));
     background-size: cover;
-    background-position: 50% 25%;
+    background-position: 50% 20%;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: height .45s cubic-bezier(.2, .7, .2, 1), box-shadow .45s ease;
 
-    span {
-      font-family: var(--y-font-display);
-      font-weight: 600;
-      font-size: 40px;
-      color: var(--y-gold);
+    // dark gradient so the text stays readable on any photo
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13, 13, 13, .92) 0%, rgba(13, 13, 13, .35) 45%, transparent 70%);
+      pointer-events: none;
+    }
+  }
+
+  &__initials {
+    font-family: var(--y-font-display);
+    font-weight: 600;
+    font-size: 56px;
+    color: var(--y-gold);
+  }
+
+  &__info {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--y-soft-white);
+
+    h3 { margin: 0; font-family: var(--y-font-display); font-weight: 600; font-size: clamp(24px, 1.7vw, 30px); }
+
+    p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--y-soft-white);
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height .45s ease, opacity .35s ease .1s;
     }
   }
 
@@ -55,8 +89,43 @@
     font-family: var(--y-font-label);
     font-weight: 500;
     font-size: 11px;
-    letter-spacing: 0.25em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--y-gold-ink);
+    color: var(--y-gold-light);
   }
+
+  // hover / keyboard focus: the card grows longer and reveals the description
+  &__card:hover &__photo,
+  &__card:focus-visible &__photo {
+    height: var(--y-card-h-hover);
+    box-shadow: 0 18px 40px rgba(13, 13, 13, .28);
+  }
+
+  &__card:hover &__info p,
+  &__card:focus-visible &__info p {
+    max-height: 140px;
+    opacity: 1;
+  }
+}
+
+// five in a single row on wide screens
+@media (min-width: 1100px) {
+  .y-stylists__grid { flex-wrap: nowrap; }
+  .y-stylists__card { flex: 1 1 0; max-width: none; }
+}
+
+// touch screens / small widths: no hover, so keep the description visible
+@media (max-width: 1099px) {
+  .y-stylists {
+    --y-card-h: 420px;
+    --y-card-h-hover: 420px;
+  }
+}
+
+@media (hover: none) {
+  .y-stylists__info p { max-height: 140px; opacity: 1; }
+}
+
+@media (max-width: 600px) {
+  .y-stylists__card { flex-basis: 100%; max-width: 380px; }
 }

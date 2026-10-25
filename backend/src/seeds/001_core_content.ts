@@ -36,10 +36,12 @@ export async function seed(knex: Knex): Promise<void> {
     { name: 'Arjun Kumar', role: 'Senior Hair Stylist', text: 'Expert in precision haircuts, modern fades, and personalized styling.', initials: 'AK', img_url: '/assets/stylists/arjun-kumar.jpg', sort_order: 1 },
     { name: 'Priya Nair', role: 'Hair Color & Transformation Expert', text: 'Specializes in balayage, global coloring, highlights, and hair transformations.', initials: 'PN', img_url: '/assets/stylists/priya-nair.jpg', sort_order: 2 },
     { name: 'Meera Lakshmi', role: 'Skin & Beauty Specialist', text: 'Passionate about facials, skincare treatments, and bridal beauty services.', initials: 'ML', img_url: '/assets/stylists/meera-lakshmi.jpg', sort_order: 3 },
+    { name: 'Rahul Menon', role: 'Barber & Grooming Specialist', text: 'Sharp cuts, beard styling, and grooming for the modern gentleman.', initials: 'RM', img_url: null, sort_order: 4 },
+    { name: 'Anjali Das', role: 'Bridal & Makeup Artist', text: 'Creates polished bridal looks, party makeup, and hair styling for special days.', initials: 'AD', img_url: null, sort_order: 5 },
   ]);
 
   await knex('gallery_items').insert([
-    { label: 'Salon reception', img_url: '/assets/gallary/yessica_gallary_1.jpeg', col_span: 2, row_span: 2, sort_order: 0 },
+    { label: 'Salon reception', img_url: '/assets/gallary/yessica_gallary_1.jpg', col_span: 2, row_span: 2, sort_order: 0 },
     { label: 'Hair', img_url: '/assets/gallary/yessica_gallary_2.jpeg', col_span: 1, row_span: 1, sort_order: 1 },
     { label: 'Bridal', img_url: '/assets/gallary/yessica_gallary_3.jpeg', col_span: 1, row_span: 2, sort_order: 2 },
     { label: 'Men', img_url: '/assets/gallary/yessica_gallary_4.jpeg', col_span: 1, row_span: 1, sort_order: 3 },
