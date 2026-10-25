@@ -83,6 +83,8 @@ export interface Review {
 export interface Post {
   id: number;
   label: string;
+  imgUrl?: string;
+  postUrl?: string;
 }
 
 export interface SiteContact {

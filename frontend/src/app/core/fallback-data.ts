@@ -74,25 +74,44 @@ export const OFFERS: Offer[] = [
 ];
 
 export const GALLERY_TILES: GalleryTile[] = [
-  { id: 0, colSpan: 2, rowSpan: 2, label: 'Salon reception', imgUrl: '/assets/reception-desk.jpg' },
-  { id: 1, colSpan: 1, rowSpan: 1, label: 'Hair' },
-  { id: 2, colSpan: 1, rowSpan: 2, label: 'Bridal' },
-  { id: 3, colSpan: 1, rowSpan: 1, label: 'Men' },
-  { id: 4, colSpan: 2, rowSpan: 1, label: 'Colour' },
-  { id: 5, colSpan: 1, rowSpan: 1, label: 'Skin' },
-  { id: 6, colSpan: 1, rowSpan: 1, label: 'Salon interior' },
-  { id: 7, colSpan: 2, rowSpan: 2, label: 'Styling' },
-  { id: 8, colSpan: 1, rowSpan: 2, label: 'Facial' },
-  { id: 9, colSpan: 1, rowSpan: 2, label: 'Grooming' },
+  { id: 0, colSpan: 2, rowSpan: 2, label: 'Salon reception', imgUrl: '/assets/gallary/yessica_gallary_1.jpeg' },
+  { id: 1, colSpan: 1, rowSpan: 1, label: 'Hair', imgUrl: '/assets/gallary/yessica_gallary_2.jpeg' },
+  { id: 2, colSpan: 1, rowSpan: 2, label: 'Bridal', imgUrl: '/assets/gallary/yessica_gallary_3.jpeg' },
+  { id: 3, colSpan: 1, rowSpan: 1, label: 'Men', imgUrl: '/assets/gallary/yessica_gallary_4.jpeg' },
+  { id: 4, colSpan: 2, rowSpan: 1, label: 'Colour', imgUrl: '/assets/gallary/yessica_gallary_5.jpeg' },
+  { id: 5, colSpan: 1, rowSpan: 1, label: 'Skin', imgUrl: '/assets/gallary/yessica_gallary_6.jpeg' },
+  { id: 6, colSpan: 1, rowSpan: 1, label: 'Salon interior', imgUrl: '/assets/gallary/yessica_gallary_7.jpeg' },
+  { id: 7, colSpan: 2, rowSpan: 2, label: 'Styling', imgUrl: '/assets/gallary/yessica_gallary_8.jpeg' },
+  { id: 8, colSpan: 1, rowSpan: 2, label: 'Facial', imgUrl: '/assets/gallary/yessica_gallary_9.jpeg' },
+  { id: 9, colSpan: 1, rowSpan: 2, label: 'Grooming', imgUrl: '/assets/gallary/yessica_gallary_10.jpeg' },
 ];
 
 export const REVIEWS: Review[] = [
-  { id: 1, text: '[Paste a real Google review here.]', name: '[Reviewer name]' },
-  { id: 2, text: '[Paste a real Google review here.]', name: '[Reviewer name]' },
-  { id: 3, text: '[Paste a real Google review here.]', name: '[Reviewer name]' },
+  {
+    id: 1,
+    text: 'Had a great experience at Yessica Saloon! ❤️ The service was excellent, the staff were friendly and professional, and the overall atmosphere was really good. Truly satisfied with the experience. Highly recommended! ✨💯',
+    name: 'Georgy Sunil',
+  },
+  {
+    id: 2,
+    text: 'Had a great experience at YESSICA UNISEX SALON, Karimugal! The staff are friendly and professional, and the service quality is excellent. The salon has a neat and comfortable atmosphere. Highly recommended for haircuts, hair treatments, skincare, and beauty services. Definitely worth visiting! ❤️',
+    name: 'Ijas Noushad',
+  },
+  {
+    id: 3,
+    text: 'Yessica Unisex Salon is truly one of the best salons in town, offering excellent service with a strong focus on customer satisfaction. The staff are professional, friendly, and attentive to every detail, ensuring a comfortable and pleasant experience. The quality of service, welcoming atmosphere, and attention to customer needs make this salon stand out. Highly recommended for anyone looking for top-quality grooming and beauty services with a 100% satisfaction experience! 💯✨',
+    name: 'Alfas Assis',
+  },
 ];
 
-export const POSTS: Post[] = Array.from({ length: 6 }, (_, i) => ({ id: i + 1, label: `Post ${i + 1}` }));
+export const POSTS: Post[] = [
+  { id: 1, label: 'Instagram post 1', imgUrl: '/assets/instagram/yessica_instagram_1.jpg', postUrl: 'https://www.instagram.com/p/DeTb2bWGYKe/' },
+  { id: 2, label: 'Instagram post 2', imgUrl: '/assets/instagram/yessica_instagram_2.jpg', postUrl: 'https://www.instagram.com/p/DdVHAZYk8jj/' },
+  { id: 3, label: 'Instagram post 3', imgUrl: '/assets/instagram/yessica_instagram_3.webp', postUrl: 'https://www.instagram.com/p/DdeVoxsJpW1/' },
+  { id: 4, label: 'Instagram post 4', imgUrl: '/assets/instagram/yessica_instagram_4.jpg', postUrl: 'https://www.instagram.com/p/Dc0_9e2Eer4/' },
+  { id: 5, label: 'Instagram post 5', imgUrl: '/assets/instagram/yessica_instagram_5.jpg', postUrl: 'https://www.instagram.com/p/Dc5-_xqmW5g/' },
+  { id: 6, label: 'Instagram post 6', imgUrl: '/assets/instagram/yessica_instagram_6.jpg', postUrl: 'https://www.instagram.com/p/DdrGVnztzTp/' },
+];
 
 export const CONTACT: SiteContact = {
   address: 'YESSICA Unisex Salon, [Full address], Karimugal, Kochi',

@@ -4,11 +4,22 @@
     <span class="y-header__sub">UNISEX SALON</span>
   </a>
 
-  <nav class="y-header__nav">
+  <nav id="site-nav" class="y-header__nav" [class.is-open]="menuOpen()" aria-label="Main">
     @for (link of navLinks; track link.href) {
-      <a [href]="link.href">{{ link.label }}</a>
+      <a [href]="link.href" (click)="closeMenu()">{{ link.label }}</a>
     }
   </nav>
 
-  <a href="#contact" class="y-btn y-btn--gold">Book Now</a>
+  <div class="y-header__actions">
+    <a href="#contact" class="y-btn y-btn--gold y-header__book">Book Now</a>
+    <button type="button"
+            class="y-header__toggle"
+            [class.is-open]="menuOpen()"
+            [attr.aria-expanded]="menuOpen()"
+            aria-controls="site-nav"
+            aria-label="Toggle menu"
+            (click)="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </header>

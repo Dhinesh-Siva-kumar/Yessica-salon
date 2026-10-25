@@ -8,9 +8,16 @@
 
     <div class="y-feed__grid">
       @for (post of posts; track post.id) {
-        <div class="y-feed__tile">
-          <span>{{ post.label }}</span>
-        </div>
+        <a class="y-feed__tile"
+           [href]="post.postUrl || 'https://www.instagram.com/' + instagramHandle"
+           target="_blank"
+           rel="noopener"
+           [attr.aria-label]="post.label + ' on Instagram'"
+           [style.background-image]="post.imgUrl ? 'url(' + post.imgUrl + ')' : null">
+          @if (!post.imgUrl) {
+            <span>{{ post.label }}</span>
+          }
+        </a>
       }
     </div>
 

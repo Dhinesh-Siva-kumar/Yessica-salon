@@ -251,14 +251,23 @@
 
 @media (max-width: 520px) {
   .y-reels3d {
-    --y-r3d-card-w: 158px;
-    --y-r3d-card-h: 255px;
-    --y-r3d-gap: 78px;
-    --y-r3d-rotate: 18deg;
-    --y-r3d-depth: -80px;
+    --y-r3d-card-w: 240px;
+    --y-r3d-card-h: 384px;
+    --y-r3d-gap: 138px;
+    --y-r3d-rotate: 20deg;
+    --y-r3d-depth: -90px;
     --y-r3d-scale-1: 0.78;
     --y-r3d-scale-2: 0.6;
   }
+
+  // Full-bleed stage so the neighbouring reels are cut off by the screen edges.
+  // Swipe, dots or tapping a side reel moves the carousel (no arrows needed).
+  .y-reels3d {
+    margin: 0 -20px;
+    --y-r3d-gap: 190px;
+  }
+
+  .y-reels3d__arrow { display: none; }
 
   .y-reels3d__play {
     width: 56px;

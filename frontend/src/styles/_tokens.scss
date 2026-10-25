@@ -28,3 +28,7 @@
   --y-max-width: 1200px;
   --y-section-pad: 110px 32px;
 }
+
+@media (max-width: 768px) {
+  :root { --y-section-pad: 72px 20px; }
+}

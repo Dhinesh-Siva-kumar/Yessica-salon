@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { NAV_LINKS } from '../../core/fallback-data';
 
 @Component({
@@ -9,4 +9,13 @@ import { NAV_LINKS } from '../../core/fallback-data';
 })
 export class Header {
   readonly navLinks = NAV_LINKS;
+  readonly menuOpen = signal(false);
+
+  toggleMenu(): void {
+    this.menuOpen.update((v) => !v);
+  }
+
+  closeMenu(): void {
+    this.menuOpen.set(false);
+  }
 }

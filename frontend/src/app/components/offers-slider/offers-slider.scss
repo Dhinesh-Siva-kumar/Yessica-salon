@@ -128,3 +128,21 @@
     transition: none;
   }
 }
+
+@media (max-width: 640px) {
+  .y-offers__carousel {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .y-offers__viewport {
+    order: -1;
+    flex: 0 0 100%;
+  }
+
+  .y-offers__inner { padding: 64px 20px; }
+  .y-offers__card { padding: 36px 24px; min-height: 0; gap: 20px; }
+  .y-offers__copy { flex-basis: 100%; h2 { font-size: 32px; } }
+  .y-offers__price { font-size: 48px; }
+}

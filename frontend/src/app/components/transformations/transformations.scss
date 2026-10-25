@@ -142,3 +142,19 @@
     color: var(--y-soft-white);
   }
 }
+
+@media (max-width: 640px) {
+  .y-trans__carousel {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .y-trans__viewport {
+    order: -1;
+    flex: 0 0 100%;
+  }
+
+  .y-trans__title { font-size: 20px; text-align: center; }
+  .y-trans__photo { padding: 10px; }
+}

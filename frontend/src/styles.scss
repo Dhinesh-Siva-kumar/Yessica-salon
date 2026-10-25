@@ -103,6 +103,10 @@ img { max-width: 100%; display: block; }
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 100%;
+  overflow-wrap: break-word;
   border: 1px solid transparent;
   cursor: pointer;
 
@@ -127,4 +131,20 @@ img { max-width: 100%; display: block; }
   color: var(--y-gold-ink);
   border-color: var(--y-gold-ink);
   background: transparent;
+}
+
+@media (max-width: 768px) {
+  .y-section-head {
+    margin-bottom: 40px;
+
+    h2 { font-size: 40px; }
+  }
+
+  .y-btn { padding: 16px 28px; }
+}
+
+@media (max-width: 480px) {
+  .y-section-head h2 { font-size: 34px; }
+  .y-eyebrow { letter-spacing: 0.3em; }
+  .y-btn { letter-spacing: 0.12em; }
 }

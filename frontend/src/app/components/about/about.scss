@@ -17,7 +17,7 @@
   &__inner {
     max-width: var(--y-max-width);
     margin: 0 auto;
-    padding: 72px 32px;
+    padding: var(--y-section-pad);
     display: flex;
     flex-wrap: wrap;
     gap: 40px;

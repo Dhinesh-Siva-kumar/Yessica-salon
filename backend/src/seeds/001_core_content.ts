@@ -61,9 +61,18 @@ export async function seed(knex: Knex): Promise<void> {
   ]);
 
   await knex('reviews').insert([
-    { text: '[Paste a real Google review here.]', name: '[Reviewer name]', rating: 5, sort_order: 1 },
-    { text: '[Paste a real Google review here.]', name: '[Reviewer name]', rating: 5, sort_order: 2 },
-    { text: '[Paste a real Google review here.]', name: '[Reviewer name]', rating: 5, sort_order: 3 },
+    {
+      text: 'Had a great experience at Yessica Saloon! ❤️ The service was excellent, the staff were friendly and professional, and the overall atmosphere was really good. Truly satisfied with the experience. Highly recommended! ✨💯',
+      name: 'Georgy Sunil', rating: 5, sort_order: 1,
+    },
+    {
+      text: 'Had a great experience at YESSICA UNISEX SALON, Karimugal! The staff are friendly and professional, and the service quality is excellent. The salon has a neat and comfortable atmosphere. Highly recommended for haircuts, hair treatments, skincare, and beauty services. Definitely worth visiting! ❤️',
+      name: 'Ijas Noushad', rating: 5, sort_order: 2,
+    },
+    {
+      text: 'Yessica Unisex Salon is truly one of the best salons in town, offering excellent service with a strong focus on customer satisfaction. The staff are professional, friendly, and attentive to every detail, ensuring a comfortable and pleasant experience. The quality of service, welcoming atmosphere, and attention to customer needs make this salon stand out. Highly recommended for anyone looking for top-quality grooming and beauty services with a 100% satisfaction experience! 💯✨',
+      name: 'Alfas Assis', rating: 5, sort_order: 3,
+    },
   ]);
 
   await knex('reels').insert([
@@ -82,7 +91,19 @@ export async function seed(knex: Knex): Promise<void> {
   ]);
 
   await knex('posts').insert(
-    Array.from({ length: 6 }, (_, i) => ({ label: `Post ${i + 1}`, sort_order: i + 1 }))
+    [
+      ['DeTb2bWGYKe', 'jpg'],
+      ['DdVHAZYk8jj', 'jpg'],
+      ['DdeVoxsJpW1', 'webp'],
+      ['Dc0_9e2Eer4', 'jpg'],
+      ['Dc5-_xqmW5g', 'jpg'],
+      ['DdrGVnztzTp', 'jpg'],
+    ].map(([code, ext], i) => ({
+      label: `Instagram post ${i + 1}`,
+      img_url: `/assets/instagram/yessica_instagram_${i + 1}.${ext}`,
+      post_url: `https://www.instagram.com/p/${code}/`,
+      sort_order: i + 1,
+    }))
   );
 
   await knex('site_settings').insert([
