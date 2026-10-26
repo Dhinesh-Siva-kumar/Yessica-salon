@@ -86,11 +86,26 @@
     padding: 14px 20px;
     gap: 0 16px;
 
-    &__name { font-size: 28px; }
+    // Keep logo + actions on one row while the menu is closed. While it's
+    // open, wrapping must be allowed so the nav (flex: 1 1 100%) can drop
+    // to its own full-width row instead of being squeezed into the row.
+    &__inner { flex-wrap: nowrap; }
 
-    &__toggle { display: flex; }
+    &.y-header--menu-open &__inner { flex-wrap: wrap; }
 
-    &__book { padding: 12px 18px; }
+    &__logo { flex: none; min-width: 0; }
+
+    &__logo-img { height: 38px; }
+
+    &__actions { flex: none; }
+
+    &__toggle { display: flex; flex: none; }
+
+    &__book {
+      padding: 12px 18px;
+      white-space: nowrap;
+      flex: none;
+    }
 
     &__nav {
       display: none;
@@ -113,6 +128,24 @@
   }
 }
 
-@media (max-width: 380px) {
+// Small phones: tighten spacing further so the logo, Book Now and the menu
+// toggle keep fitting on one row without overflowing off the right edge.
+@media (max-width: 480px) {
+  .y-header {
+    padding: 12px 16px;
+    gap: 0 10px;
+
+    &__logo-img { height: 34px; }
+
+    &__actions { gap: 8px; }
+
+    &__book {
+      padding: 10px 12px;
+      font-size: 11px;
+    }
+  }
+}
+
+@media (max-width: 365px) {
   .y-header__book { display: none; }
 }
